@@ -1,0 +1,770 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;700&display=swap');
+@import "utils/variables";
+
+/* =+=+=+=+=+= Mixins styles =+=+=+=+=+=*/
+@mixin reset {
+    border: none;
+    background: none;
+}
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flexSpaceBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* =+=+=+=+=+= General styles =+=+=+=+=+=*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+body {
+    background-color: $bg;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+a {text-decoration: none;}
+
+li {list-style: none;}
+
+main {
+    padding: 8px;
+
+    @media (min-width: 768px) {
+        margin: 2rem 80px;
+        padding: 0rem;
+    }
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px $bg inset !important;
+}
+
+input {font-family: 'JetBrains Mono', monospace;}
+
+.visible {display: block;}
+
+.hide {display: none;}
+
+.danger {color: $danger-clr;}
+
+.bold {font-weight: bolder}
+
+.two-options {@include flexSpaceBetween();}
+
+.two-fields {
+    @include flexSpaceBetween();
+
+    .form {width: 49%;}
+}
+
+.form {
+    position: relative;
+    width: 100%;
+    margin: .4rem 0;
+
+    .form__input {
+        border: 1.4px solid $color-third;
+        border-radius: $border-radius;
+        font-family: inherit;
+        font-size: .9em;
+        color: $color;
+        outline: none;
+        background: none;
+        height: 100%;
+        width: 100%;
+        padding: 12px 2px 12px 20px;
+    
+        &:focus {border-color: $third-clr;}
+    }
+    
+    .input__label {
+        background-color: $bg;
+        position: absolute;
+        padding: 0 0.4rem;
+        font-size: .8em;
+        color: $color;
+        left: 1rem;
+        top: 0.9rem;
+        cursor: text;
+        transition: all 200ms ease-in;
+    }
+
+    .form__input:focus ~ .input__label,
+    .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .input__label {
+        top: -0.5rem;
+        font-size: .8em;
+        left: 0.8rem;
+    }
+}
+
+.btn {
+    background-color: $third-clr;
+    border: none;
+    padding: 8px 12px;
+    border-radius: $border-radius;
+    color: $color-secondary;
+    transition: all $transition-time ease-in-out; 
+
+    &:hover {
+        background-color: darken($color: $third-clr, $amount: 20);
+    }
+}
+
+.btn--edit {
+    border-radius: 2px;
+    color: $color-secondary;
+    background-color: $color;
+    padding: 2px 10px;
+}
+
+.btn--special {
+    background: none;
+    color: $third-clr;
+}
+
+.btn:active {
+    background-color: darken($color: $third-clr, $amount: 5);
+    transform: scale(.9);
+}
+
+.btn--secondary {
+    border: 1px solid $third-clr;
+    background-color: transparent;
+}
+
+.btn--large {width: 100%;}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.subtitle, .difficulty {
+    color: $color-third;
+    font-size: .9em;
+}
+
+/* =+=+=+=+=+= Nav && Header styles =+=+=+=+=+=*/
+.menu {
+    background-color: $bg-secondary;
+    position: absolute;
+    width: 70vw;
+    height: 100vh;
+    top: 0;
+    left: -768px;
+    padding: 2rem .4rem;
+    text-align: center;
+    font-size: .9em;
+    z-index: 42;
+    transition: all .8s ease-in-out;
+
+    a {color: $color;}
+
+    .nav__items {display: block;}
+
+    .nav__item a {margin: 0 1rem;}
+
+    .nav__item:last-child {
+        position: absolute;
+        bottom: 2rem;
+    }
+
+    li {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        padding: .4rem;
+        margin-bottom: 8px;
+    }
+
+    .menu__profile {
+        margin-bottom: 2rem;
+        display: block;
+    }
+}
+
+.achievements {
+    display: none;
+    padding: 12px;
+    font-size: .9em;
+    
+    @media (min-width: 768px) {
+        @include flexSpaceBetween();
+    }
+}
+
+.open {
+    display: block;
+    left: 0px;
+}
+
+.nav__items {display: none;}
+
+nav {
+  @include flexSpaceBetween();
+  padding: 8px;
+
+  .logo {
+    width: 24px;
+    height: 24px;
+    font-size: 1.5em;
+  }
+
+  #burger-icon {
+    @include flexCenter();
+    @include reset();
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    background-color: $bg-secondary;
+    position: fixed;
+    top: 0;
+    width: 55px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+
+    .logo {
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 1rem;
+      font-size: 1.2em;
+    }
+    
+    a {
+      @include flexCenter();
+      padding: .4rem;
+      margin: 5px 0;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      transition: all $transition-time ease-in-out;
+    }
+
+    #burger-icon {display: none;}
+    
+    li:not(:last-child) a:hover, .active {
+      background-color: transparentize($color: $third-clr, $amount: .5);
+      
+      #icon {
+        fill: $third-clr;
+        transition: all $transition-time ease-in-out;
+      }
+    }
+    
+    .nav__item {
+      @include flexCenter();
+
+      &:last-child {
+        position: absolute;
+        bottom: 1rem;
+      }
+    }
+  }
+}
+
+.header {
+  padding: 8px;
+
+  @media (min-width: 768px) {
+    margin: 0 80px;
+    padding: 1rem 0;
+    @include flexSpaceBetween();
+
+    a {color: $third-clr;}
+
+    .search {width: 400px;}
+  }
+}
+
+@media (min-width: 768px) {
+  .nav__items {display: block;}
+  
+  .menu, #burger-icon {display: none;}  
+}
+
+.search {
+    @include flexSpaceBetween();
+    background-color: $bg-secondary;
+    border-radius: $border-radius;
+
+    .search__input {
+        @include reset();
+        height: 100%;
+        width: 100%;
+        padding: 12px 2px 12px 16px;
+    }
+
+    .search__btn {
+        @include reset();
+        @include flexCenter();
+        padding: 6px 8px;
+    }
+
+    .search__icon {width: 20px;}
+}
+
+.bell {
+    @include flexCenter();
+    position: relative;
+
+    span {
+        @include flexCenter();
+        background-color: $third-clr;
+        color: $color-secondary;
+        border: 1px solid $bg-secondary;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        border-radius: 50%;
+        font-size: 10px;
+        padding: 2px;
+    }    
+}
+
+/* =+=+=+=+=+= Home styles =+=+=+=+=+=*/
+.index__quizes {  
+  .quizes {
+    display: flex;
+    flex-wrap: wrap;
+    // flex-wrap: nowrap;
+	  overflow-x: scroll;
+  }
+
+  @media (min-width: 768px) {margin: 2rem 0;}
+}
+
+.quizes .card {margin: 10px auto;}
+
+.quizes {
+}
+
+.card {
+    background-color: $bg-secondary;
+    border-radius: $border-radius;
+    position: relative;
+    width: 280px;
+    height: 300px;
+    overflow: hidden;
+    transition: all $transition-time ease-in-out;
+
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: 4px 4px 20px 1px #00000033;
+    }
+
+    p,
+    span,
+    .btn {
+        font-size: .9em;
+    }
+
+    .card__cover {
+        width: 100%;
+        height: 130px;
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    .card__info {
+        padding: .8rem;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        .card__title {margin: 0;}
+
+        p {margin: .8rem 0 1.4rem 0}
+    }
+
+    .card__bottom {@include flexSpaceBetween();}
+
+    .btn {padding: 8px 24px;}
+
+    @media (min-width: 768px) {width: 260px;}
+}
+
+/* =+=+=+=+=+= Quiz Page styles =+=+=+=+=+= */
+#myProgress {
+    width: 100%;
+    height: 16px;
+    border-radius: 50px;
+    background-color: #c9c9c9;
+    overflow: hidden;
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 100;
+    
+    #myBar {
+        position: relative;
+        width: .5%;
+        height: 16px;
+        border-radius: 50px;
+        background-color: $third-clr;
+        transition: width .6s ease-in-out;
+    }
+    
+    #bar-decoration {
+        position: absolute;
+        background: #fff;
+        text-align: center;
+        opacity: .1;
+        width: 96%;
+        height: 30%;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: inherit;
+        top: 4px;
+    }
+}
+
+.quiz {
+    // =+=+=+=+= Questions =+=+=+=+=
+    .question {}
+
+    .question__text {margin: 3rem 0;}
+
+    .quiz-btns {
+        position: relative;
+
+        button {
+            font-weight: bolder;
+            font-size: 1em;
+            padding: .6rem 1.6rem;
+        }
+    }
+
+    // =+=+=+=+= Answers =+=+=+=+=
+    .answer {
+        background-color: $bg-secondary;
+        margin: .6rem 0;
+        border-radius: $border-radius;
+        width: 100%;
+        display: block;
+        padding: 1rem;
+        cursor: pointer;
+    
+        .answer__number {
+            @include flexCenter();
+            border: 1.6px solid $color-third;
+            color: $color-third;
+            display: inline-flex;
+            font-size: .8em;
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+    
+        input {display: none;}
+    
+        @media (min-width: 768px) {width: 40%;}
+    }
+
+    .answer.selected {
+        background-color: transparentize($color: $third-clr, $amount: .8);
+        border: none;
+        transition: all $transition-time ease-in-out;
+    }
+}
+
+/* =+=+=+=+=+= Settings styles =+=+=+=+=+= */
+.profile {
+
+  // display: flex;
+  .profile__main {
+    display: flex;
+    
+  }
+
+  .profile__info {
+
+    // display: inline-block;
+    margin-right: 5rem;
+  }
+
+  .marks {
+    @include flexSpaceBetween();
+    // background-color: #2370ff;
+    height: 100px;
+    width: 100%;
+
+    .marks__icon {
+      background-color: $bg-secondary;
+      margin-right: 1rem;
+      padding: .8rem;
+      box-shadow: 4px 4px 20px 1px #0000001a;
+      border-radius: $border-radius;
+    }
+
+    .marks__results, .marks__score, .marks__answers {
+      // @include flexSpaceBetween();
+      display: flex;
+      // background-color: green;
+      width: 32%;
+    }
+  }
+}
+
+/* =+=+=+=+=+= Settings styles =+=+=+=+=+= */
+.options {
+  ul {@include flexCenter();} 
+
+  &__item {
+    padding: .5em;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    
+    a {color: $color;}
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+
+    ul {
+      display: block;
+      justify-content: space-between;
+      width: 200px;
+    } 
+
+    &__item {
+      margin: 4px 0;
+      text-align: left;
+      width: 100%;
+      padding: 8px 1rem;
+      border-radius: $border-radius;
+    }
+  }
+}
+
+.settings {
+    width: 100%;
+    padding: 0 1rem;
+
+    &__account,
+    &__security,
+    &__theme {
+        padding: 2rem 0;
+
+        p {
+            font-size: 14px;
+            margin: 1rem 0;
+        }
+    }
+
+    .settings__security .two-options{
+        a, .btn {font-size: .9em;}
+    
+        .btn {padding: 8px 20px;}
+    }
+
+    .current {position: relative;} // options link active
+
+    .current::after {
+        position: absolute;
+        bottom: 0;
+        left: 0px;
+        width: 100%;
+        height: 4px;
+        content: "";
+        background: $third-clr;
+    }
+
+    form {margin: 1rem 0;}
+
+    @media (min-width: 768px) {
+        display: flex;
+        width: auto;
+
+        &__account, &__security, &__theme {
+            margin: auto;
+            width: 40%;
+        }
+
+        .current {
+            background-color: transparentize($color: $third-clr, $amount: .8);
+        }
+
+        .current::after {
+            left: -8px;
+            border-radius: $border-radius;
+            width: 4px;
+            height: 100%;
+        }
+    }
+}
+
+.avatar {
+    position: relative;
+    width: 192px;
+    height: 192px;
+    margin: 2rem auto;
+
+    img {border-radius: 50%;}
+
+    button {
+        position: absolute;
+        bottom: 14px;
+        right: 0px;
+    }
+}
+
+.pic-menu {
+    background-color: $bg-secondary;
+    position: fixed;
+    z-index: 5;
+    left: 10px;
+    right: 10px;
+    top: 75px;
+    border-radius: $border-radius;
+    padding: 0 .6rem;
+    max-height: 80%;
+
+    form {margin: 0;}
+
+    footer,
+    header {
+        padding: .6rem;
+    }
+
+    footer {text-align: right;}
+}
+
+.list {
+    padding: .5rem;
+    overflow: scroll;
+    height: 300px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.list--theme {
+    @include flexCenter();
+    flex-wrap: wrap;
+}
+
+.list__option {
+    width: 49%;
+    padding: 4px;
+    display: block;
+    margin: 4px 0;
+    border: 2px solid transparent;
+    border-radius: $border-radius;
+
+    .cover {width: 100%;}
+
+    input {display: none;}
+}
+
+.list__option--theme {
+    p {
+        display: contents;
+        margin: 0 1rem;
+    }
+
+    input {display: inline-flex;}
+}
+
+.list__option.selected {border: 2px solid $third-clr;}
+
+.theme__cover {width: 120px;}
+
+.account__delete {
+    padding: 1rem 0;
+
+    p {margin: .8rem 0 2rem 0;}
+}
+
+.explore {
+    section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .explore__item {
+        background-color: #aa3ed4;
+        width: 49%;
+        margin: 4px 0;
+        display: block;
+        border-radius: $border-radius;
+        position: relative;
+        overflow: hidden;
+        transition: all $transition-time ease-in-out;
+        
+        a {
+            padding: 1rem;
+            color: #fff;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        img {
+            width: 50px;
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+        }
+
+        @media (min-width: 768px) {width: 24%;}
+    }
+
+    .explore__item:nth-of-type(2) {background-color: #7723ff;} // sports
+    .explore__item:nth-of-type(3) {background-color: #ff8d23;} // math
+    .explore__item:nth-of-type(4) {background-color: #7c541f;} // history
+    .explore__item:nth-of-type(5) {background-color: #2370ff;} // tech
+    .explore__item:nth-of-type(6) {background-color: #1097f1;} // general
+    .explore__item:nth-of-type(7) {background-color: #7723ff;} // animals
+    .explore__item:nth-of-type(8) {background-color: #ff235a;} // space
+}
+
+footer {
+    background-color: red;
+    margin: 0 75px;
+
+    ul {display: flex;}
+}
+
+/* =+=+=+=+=+= desktop styles =+=+=+=+=+=*/
+@media only screen and (min-width: 768px) {
+    .header {
+        margin: 0 80px;
+        padding: 1rem 0;
+        @include flexSpaceBetween();
+
+        a {color: $third-clr;}
+
+        .search {width: 400px;}
+    }
+    
+    .nav__items {display: block;}
+
+    .menu, #burger-icon {display: none;}
+}

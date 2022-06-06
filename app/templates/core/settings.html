@@ -1,0 +1,62 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    Settings
+{% endblock title %}
+
+{% block body %}
+    <main class="settings">
+        {% include 'modules/options.html' %}
+        <section class="settings__account">
+            <h3>Account Settings</h3>
+            <div class="avatar">
+                <img src="{% static 'img/'|add:user.avatar|add:'.png' %}" alt="Profile Picture">
+                <button id="updateProfilePicBtn" class="btn btn--edit">
+                    <!-- <img src="{% static 'img/edit.svg' %}" alt="edit"> -->
+                    Edit
+                </button>
+            </div>
+            
+            {% include 'modules/profilepic_menu.html' %}
+            <!-- <h2>{{user.username}}</h2> -->
+
+            <form action="{% url 'settings' %}" method="post">
+                {% csrf_token %}
+                <div class="form">
+                    {{ form.username }}
+                    <label for="username" class="input__label">username</label>
+                    {{ form.username.errors }}
+                </div>
+                <div class="two-fields">
+                    <div class="form">
+                        {{ form.first_name }}
+                        <label for="first_name" class="input__label">first_name</label>
+                        {{ form.first_name.errors }}
+                    </div>
+                    <div class="form">
+                        {{ form.last_name }}
+                        <label for="last_name" class="input__label">last_name</label>
+                        {{ form.last_name.errors }}
+                    </div>
+                </div>
+                <div class="form">
+                    {{ form.email }}
+                    <label for="email" class="input__label">Email</label>
+                    {{ form.email.errors }}
+                </div>
+                <input type="submit" value="Update" class="btn">
+            </form>
+
+            <hr>
+    
+            <section class="account__delete">
+                <h3 class="danger">Delete account</h3>
+                <p>Once you delete your account, there is no going back. Please be certain.</p>
+                <a href="" class="danger">Delete Account</a>
+            </section>
+        </section>
+
+    </main>
+{% endblock body %}

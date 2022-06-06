@@ -1,0 +1,13 @@
+{% load static %}
+
+<div class="card">
+    <img src="{% static 'img/coding-cover.png' %}" alt="{{ quiz.name }}'s cover" class="card__cover">
+    <div class="card__info">
+      <h3 class="card__title">{{ quiz.name }}</h3>
+      <p>{{ quiz.topic }}</p>
+      <div class="card__bottom">
+        <span class="difficulty">{{ quiz.difficulty }}</span>       
+        <a href="{{ quiz.get_absolute_url }}" class="btn">Take</a>
+      </div>
+    </div>
+</div>

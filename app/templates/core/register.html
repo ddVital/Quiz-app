@@ -1,0 +1,24 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block body %}
+    <div class="auth">
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+                {{ form.username }}
+                {{ form.first_name }}
+                {{ form.last_name }}
+                {{ form.email }}
+                {{ form.password }}
+                {{ form.confirmation }}
+            <li>
+                <button type="submit" class="btn btn--large">Register</button>
+            </li>
+        </form>
+    </div>
+{% endblock body %}

@@ -1,0 +1,13 @@
+<div class="options">
+    <ul>
+        <li class="options__item {% if request.resolver_match.url_name == 'settings' %}current{% endif %}">
+            <a href="{% url 'settings' %}">Account</a>
+        </li>
+        <li class="options__item {% if request.resolver_match.url_name == 'security' %}current{% endif %}">
+            <a href="{% url 'security' %}">Security</a>
+        </li>
+        <li class="options__item {% if request.resolver_match.url_name == 'theme' %}current{% endif %}">
+            <a href="{% url 'theme' %}">Theme</a>
+        </li>
+    </ul>
+</div>

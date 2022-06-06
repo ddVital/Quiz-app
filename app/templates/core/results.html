@@ -1,0 +1,20 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  Results {{ results.quiz.name }}
+{% endblock title %}
+
+{% block body %}
+  <main>
+    <div class="congratulations">
+      <div></div>
+      
+    </div>
+    - {{ results }} -
+    <div id="myProgress">
+      <div style="background: red;width:{{results.score}}%;" id="myBar"></div>
+    </div>
+  </main>
+{% endblock body %}

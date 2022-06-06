@@ -1,0 +1,58 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  @{{ profile.username }}
+{% endblock title %}
+
+{% block body %}
+    <main class="profile">
+        <section class="profile__main">
+          <div class="profile__info">
+            <img src="{% static 'img/'|add:profile.avatar|add:'.png' %}" alt="Profile Picture" class="">
+            <h1>David Vital</h1>
+            <h3>{{profile.username}}</h3>
+            <p>{{ profile.following.count}}</p>
+            <p>{{ profile.followers.count}}</p>
+          </div>
+        <!-- </div> -->
+
+          <div class="marks">
+            <div class="marks__results">
+              <div class="marks__icon">
+                <img src="{% static 'img/flag.svg' %}" alt="highest">
+              </div>
+              <div>
+                <h2>23</h2>
+                <p>Quizes</p>
+              </div>
+            </div>
+            <div class="marks__score">
+              <div class="marks__icon">
+                <img src="{% static 'img/highest.svg' %}" alt="highest">
+              </div>
+              <div>
+                <h2>98%</h2>
+                <p>Quizes media</p>
+              </div>
+            </div>
+            <div class="marks__answers">
+              <div class="marks__icon">
+                <img src="{% static 'img/check.svg' %}" alt="highest">
+              </div>
+              <div>
+                <h2>142</h2>
+                <p>correct answers</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- <section>
+          <header>
+
+          </header>
+        </section> -->
+    </main>
+{% endblock body %}

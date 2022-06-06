@@ -1,0 +1,23 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    Explore
+{% endblock title %}
+
+{% block body %}
+    <main>
+      <a href="{% url 'category' 'coding' %}">Coding</a>
+      <a href="{% url 'category' 'sports' %}">Sports</a>
+      <a href="{% url 'category' 'math' %}">Math</a>
+      <a href="{% url 'category' 'history' %}">History</a>
+      <a href="{% url 'category' 'tech' %}">Tech</a>
+      <a href="{% url 'category' 'general' %}">General</a>
+    
+      <hr />
+    
+      {{ results }}
+    </main>
+{% endblock body %}
+    

@@ -1,0 +1,64 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if user.theme == 'dark' %}
+
+  {% else %}  
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {% endif %}  
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+
+  <title>{{ quiz.name }} | Quiz</title>
+  
+</head>
+<body>
+  <main class="quiz">
+    <div id="myProgress">
+      <div id="myBar">
+        <div id="bar-decoration"></div>
+      </div>
+    </div>
+
+    <form action="{% url 'check_results' quiz.slug %}" method="post">
+      {% csrf_token %}
+        {% for question in quiz.get_questions %}
+          <div class="question {% if forloop.counter0 == 0 %}visible{% else %}hide{% endif %}" id="question-{{ forloop.counter0 }}">
+            <p class="question__text">
+              <span class="bold">{{ forloop.counter }}</span>. {{ question }}
+            </p>
+            {% for answer in question.get_answers %}
+            <!-- <div class="answer"> -->
+            <label for="{{question.pk}}-{{ forloop.counter0 }}-answer" class="answer">
+              <span class="answer__number">{{forloop.counter}}</span>
+              <input type="radio" name="{{question.pk}}-answer" value="{{answer.text}}" id="{{question.pk}}-{{ forloop.counter0 }}-answer" class="list-options">
+              {{answer.text}}
+            </label>
+                <!-- <label for="{{question.pk}}-{{ forloop.counter0 }}-answer">{{answer.text}}</label> -->
+                <!-- <p>{{ answer.text }}</p> -->
+            <!-- </div> -->
+            {% endfor %}
+
+            {% if forloop.counter == quiz.get_questions.count %}
+              <button type="submit" class="btn">Next</button>
+            {% else %}
+              <div class="two-options quiz-btns">
+                <button type="button" class="btn btn--special">Exit</button>
+                <button type="button" data-question="{{ forloop.counter0 }}" data-max="{{ quiz.get_questions.count }}" class="btn btn--question next-question-btn">Next question</button>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+    </form>
+  </main>
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+
+</body>
+</html>

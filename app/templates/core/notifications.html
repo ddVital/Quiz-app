@@ -1,0 +1,20 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Notifications" %}
+{% endblock title %}
+
+{% block body %}
+    {% for notification in user.get_notifications %}
+    <div class="notification alert">
+        <form action="{% url 'delete_notification' notification.id %}" method="post" id="deleteNot-form">
+            {% csrf_token %}
+            <p>{{ notification.read }}</p>
+            <p>{{ notification.name }}</p>
+            <button type="submit">Delete</button>
+        </form>
+    </div>    
+    {% endfor %}
+{% endblock body %}

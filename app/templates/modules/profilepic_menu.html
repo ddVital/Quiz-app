@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="pic-menu hide" id="pic-options">
+    <header>
+        <h2>Edit avatar</h2>
+    </header>
+
+    <hr>
+
+    <form action="{% url 'update_avatar' %}" method="POST" id="pic-form">
+        {% csrf_token %}
+        <div class="list">
+            {% for avatar in user.get_avatars %}
+                <label for="{{avatar.0}}" class="list__option {% if user.avatar == avatar.0 %}selected{% endif %}">
+                    <img src="{% static 'img/'|add:avatar.0|add:'.png' %}" alt="default" class="cover">
+                    <input type="radio" name="pic" id="{{avatar.0}}" value="{{avatar.0}}" class="list-options" {% if user.avatar == avatar.0 %}checked{% endif %}>
+                </label>
+            {% endfor %}
+        </div>
+
+        <footer class="footer">
+            <input type="submit" value="cancel" class="btn btn--special">
+            <input type="submit" value="Update" class="btn btn">
+        </footer>
+    </form>
+</div>

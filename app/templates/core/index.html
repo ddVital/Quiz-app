@@ -1,0 +1,62 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+    <main class="index">
+      <section class="index__quizes">
+        <p class="subtitle">You may Like</p>
+        <div class="quizes">
+          {% for quiz in quizes %}
+            {% include 'modules/card.html' %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="index__quizes">
+        <p class="subtitle">New</p>
+        <div class="quizes">
+          {% for quiz in quizes %}
+            {% include 'modules/card.html' %}
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+    
+    <script>
+       
+var swiper = new Swiper(".slide-content", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+
+    breakpoints:{
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 3,
+        },
+    },
+  });
+    </script>
+{% endblock body %}

@@ -1,0 +1,33 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    Theme
+{% endblock title %}
+
+{% block body %}
+    <main class="settings">
+        {% include 'modules/options.html' %}
+
+        <section class="settings__theme">
+            <header>
+                <h2>Theme preferences</h2>
+                <p>Choose how Quiz looks to you. Select a single theme, or sync with your system and automatically switch between day and night themes.</p>
+            </header>
+            <form action="{% url 'theme' %}" method="post" class="list--theme">
+                {% csrf_token %}
+                {% for theme in user.get_all_themes %}
+                    <label for="{{theme.0}}" class="list__option list__option--theme {% if user.theme == theme.0 %}selected{% endif %}">
+                        <img src="{% static 'img/'|add:theme.0|add:'-theme.png' %}" alt="{{theme.0}} theme" class="cover">
+                        <input type="radio" name="theme" id="{{theme.0}}" value="{{theme.0}}" class="list-options" {% if user.theme == theme.0 %}checked{% endif %}>
+                        <p>{{ theme.1 }}</p>
+                    </label>
+                {% endfor %}
+                <input type="submit" value="Update" class="btn btn--large">
+            </form>
+        </section>
+        
+        <hr>
+    </main>
+{% endblock body %}
