@@ -10,7 +10,7 @@
   {% if user.theme == 'dark' %}
 
   {% else %}  
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% endif %}  
 
   <script src="{% static 'js/main.js' %}" defer></script>
@@ -20,39 +20,45 @@
 </head>
 <body>
   <main class="quiz">
-    <div id="myProgress">
-      <div id="myBar">
-        <div id="bar-decoration"></div>
+    <section class="quiz__top">
+      <a href="{% url 'index' %}" class="close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.37764 3.37764C3.49705 3.25794 3.6389 3.16296 3.79507 3.09816C3.95123 3.03336 4.11865 3 4.28773 3C4.45681 3 4.62423 3.03336 4.7804 3.09816C4.93656 3.16296 5.07841 3.25794 5.19782 3.37764L12.0003 10.1827L18.8029 3.37764C18.9224 3.25813 19.0643 3.16333 19.2204 3.09864C19.3766 3.03396 19.5439 3.00067 19.7129 3.00067C19.882 3.00067 20.0493 3.03396 20.2055 3.09864C20.3616 3.16333 20.5035 3.25813 20.623 3.37764C20.7425 3.49716 20.8373 3.63904 20.902 3.7952C20.9667 3.95135 21 4.11871 21 4.28773C21 4.45675 20.9667 4.62411 20.902 4.78027C20.8373 4.93642 20.7425 5.0783 20.623 5.19782L13.8179 12.0003L20.623 18.8029C20.7425 18.9224 20.8373 19.0643 20.902 19.2204C20.9667 19.3766 21 19.5439 21 19.7129C21 19.882 20.9667 20.0493 20.902 20.2055C20.8373 20.3616 20.7425 20.5035 20.623 20.623C20.5035 20.7425 20.3616 20.8373 20.2055 20.902C20.0493 20.9667 19.882 21 19.7129 21C19.5439 21 19.3766 20.9667 19.2204 20.902C19.0643 20.8373 18.9224 20.7425 18.8029 20.623L12.0003 13.8179L5.19782 20.623C5.0783 20.7425 4.93642 20.8373 4.78027 20.902C4.62411 20.9667 4.45675 21 4.28773 21C4.11871 21 3.95135 20.9667 3.7952 20.902C3.63904 20.8373 3.49716 20.7425 3.37764 20.623C3.25813 20.5035 3.16333 20.3616 3.09864 20.2055C3.03396 20.0493 3.00067 19.882 3.00067 19.7129C3.00067 19.5439 3.03396 19.3766 3.09864 19.2204C3.16333 19.0643 3.25813 18.9224 3.37764 18.8029L10.1827 12.0003L3.37764 5.19782C3.25794 5.07841 3.16296 4.93656 3.09816 4.7804C3.03336 4.62423 3 4.45681 3 4.28773C3 4.11865 3.03336 3.95123 3.09816 3.79507C3.16296 3.6389 3.25794 3.49705 3.37764 3.37764Z" fill="#9C9C9C" id="icon"/>
+          </svg>          
+      </a>
+      <div id="myProgress">
+        <div id="myBar">
+          <div id="bar-decoration"></div>
+        </div>
       </div>
-    </div>
+      <span>{{quiz.get_questions.count}}</span>
+    </section>
 
     <form action="{% url 'check_results' quiz.slug %}" method="post">
       {% csrf_token %}
         {% for question in quiz.get_questions %}
           <div class="question {% if forloop.counter0 == 0 %}visible{% else %}hide{% endif %}" id="question-{{ forloop.counter0 }}">
-            <p class="question__text">
-              <span class="bold">{{ forloop.counter }}</span>. {{ question }}
-            </p>
-            {% for answer in question.get_answers %}
-            <!-- <div class="answer"> -->
-            <label for="{{question.pk}}-{{ forloop.counter0 }}-answer" class="answer">
-              <span class="answer__number">{{forloop.counter}}</span>
-              <input type="radio" name="{{question.pk}}-answer" value="{{answer.text}}" id="{{question.pk}}-{{ forloop.counter0 }}-answer" class="list-options">
-              {{answer.text}}
-            </label>
-                <!-- <label for="{{question.pk}}-{{ forloop.counter0 }}-answer">{{answer.text}}</label> -->
-                <!-- <p>{{ answer.text }}</p> -->
-            <!-- </div> -->
-            {% endfor %}
+            <div class="question__content">
+              <p class="question__text">
+                <span class="bold">{{ forloop.counter }}</span>. {{ question }}
+              </p>
+              {% for answer in question.get_answers %}
+                <label for="{{question.pk}}-{{ forloop.counter0 }}-answer" class="answer">
+                  <span class="answer__number">{{forloop.counter}}</span>
+                  <input type="radio" name="{{question.pk}}-answer" value="{{answer.text}}" id="{{question.pk}}-{{ forloop.counter0 }}-answer" class="list-options">
+                  {{answer.text}}
+                </label>
+              {% endfor %}
+            </div>
 
-            {% if forloop.counter == quiz.get_questions.count %}
-              <button type="submit" class="btn">Next</button>
-            {% else %}
-              <div class="two-options quiz-btns">
-                <button type="button" class="btn btn--special">Exit</button>
+            <div class="quiz__btn">
+              <button class="btn btn--tiritiary">Exit</button>
+              {% if forloop.counter == quiz.get_questions.count %}
+                <button type="submit" class="btn">Next</button>
+              {% else %}
                 <button type="button" data-question="{{ forloop.counter0 }}" data-max="{{ quiz.get_questions.count }}" class="btn btn--question next-question-btn">Next question</button>
-              </div>
-            {% endif %}
+              {% endif %}
+            </div>
           </div>
         {% endfor %}
     </form>

@@ -7,56 +7,21 @@
 {% endblock title %}
 
 {% block body %}
-    <main class="explore">
-        <section>
-            <li class="explore__item">
-                <a href="{% url 'category' 'coding' %}">Coding</a>
-                <img src="{% static 'img/coding.png' %}" alt="explore item cover">
-            </li>
-            <li class="explore__item">
-                <a href="{% url 'category' 'sports' %}">Sports</a>
-                <img src="{% static 'img/sports.png' %}" alt="Explore sports cover ">
-            </li>
-            <li class="explore__item">
-                <a href="{% url 'category' 'math' %}">Math</a>
-                <img src="{% static 'img/math.png' %}" alt="Explore math cover ">
-            </li>
-            <li class="explore__item">
-                <a href="{% url 'category' 'history' %}">History</a>
-                <img src="{% static 'img/history.png' %}" alt="Explore history cover">
-            </li>
-            <li class="explore__item">
-                <a href="{% url 'category' 'tech' %}">Tech</a>
-                <img src="{% static 'img/tech.png' %}" alt="Explore tech cover">
-            </li>
-            <li class="explore__item">
-                <a href="{% url 'category' 'general' %}">General</a>
-            </li>
-            <li class="explore__item">
-                <a href="{% url 'category' 'animals' %}">Animals</a>
-                <img src="{% static 'img/animals.png' %}" alt="Explore animals cover">
-            </li>
-            <li class="explore__item">
-                <a href="{% url 'category' 'space' %}">Space</a>
-                <img src="{% static 'img/space.png' %}" alt="Explore history cover">
-            </li>
-        </section>
-        <section>
-            <p>Recommended</p>
-            <div class="quizes">
-                {% for quiz in quizes %}
-                    {% include 'modules/card.html' %}
-                {% endfor %}
-            </div>
-        </section>
-        
-        <section>
-            <p>New</p>
-            <div class="quizes">
-                {% for quiz in quizes %}
-                    {% include 'modules/card.html' %}
-                {% endfor %}
-            </div>
-        </section>
-    </main>
+<main class="explore">
+  <section class="explore__category">
+    <section class="category__items">
+      {% for category in categories %}
+      <li class="explore__item {% if category.0 == 'general' %} active {% endif %}">
+        <a href="{% url 'category' category.0 %}">{{ category.0 }}</a>
+      </li>
+      {% endfor %}
+    </section>
+  </section>
+  <section>
+    <p>Explore</p>
+    <div class="quizes">
+      {% for quiz in quizes %} {% include 'modules/card.html' %} {% endfor %}
+    </div>
+  </section>
+</main>
 {% endblock body %}

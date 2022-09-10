@@ -10,14 +10,21 @@
     <main class="settings">
         {% include 'modules/options.html' %}
         <section class="settings__account">
-            <h3>Account Settings</h3>
-            <div class="avatar">
-                <img src="{% static 'img/'|add:user.avatar|add:'.png' %}" alt="Profile Picture">
-                <button id="updateProfilePicBtn" class="btn btn--edit">
-                    <!-- <img src="{% static 'img/edit.svg' %}" alt="edit"> -->
-                    Edit
-                </button>
-            </div>
+            <h2 class="section-name">Account</h2>
+            
+            <section class="settings__avatar">
+                <div class="avatar">
+                    <img src="{% static 'img/'|add:user.avatar|add:'.png' %}" alt="Profile Picture">
+                    <button id="updateProfilePicBtn" class="btn btn--edit">
+                        <!-- <img src="{% static 'img/icons/edit.svg' %}" alt="edit"> -->
+                        Edit
+                    </button>
+                </div>
+                <div class="info">
+                    <h2 class="bold">@{{ user.username}}</h2>
+                    <p class="subtext">Your personal account</p>
+                </div>
+            </section>
             
             {% include 'modules/profilepic_menu.html' %}
             <!-- <h2>{{user.username}}</h2> -->
@@ -46,14 +53,14 @@
                     <label for="email" class="input__label">Email</label>
                     {{ form.email.errors }}
                 </div>
-                <input type="submit" value="Update" class="btn">
+                <input type="submit" value="Update" class="btn btn--large">
             </form>
 
             <hr>
     
             <section class="account__delete">
                 <h3 class="danger">Delete account</h3>
-                <p>Once you delete your account, there is no going back. Please be certain.</p>
+                <p class="">Once you delete your account, there is no going back. Please be certain.</p>
                 <a href="" class="danger">Delete Account</a>
             </section>
         </section>

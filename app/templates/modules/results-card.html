@@ -1,0 +1,11 @@
+<div class="results__card">
+  <div class="info">
+    <!-- <p>{{ result }}</p> -->
+    <h3 class="card__title">{{ result.quiz.name }}</h3>
+    <p>{{ result.quiz.topic }}</p>
+    <div class="card__bottom">
+      <span class="difficulty">{{ result.score }}/100</span>       
+      <a href="{{ result.quiz.get_absolute_url }}" class="btn">Take</a>
+    </div>
+  </div>
+</div>

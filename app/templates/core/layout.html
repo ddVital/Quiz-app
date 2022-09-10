@@ -6,47 +6,97 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% if user.theme == 'dark' %}
-
-    {% else %}  
-      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    {% endif %}  
+    {% if user.theme == 'dark' %} {% else %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% endif %}
 
     <script src="{% static 'js/main.js' %}" defer></script>
 
-    <title> QUIZ | {% block title %} {% endblock title %}</title>
+    <title>QUIZ | {% block title %} {% endblock title %}</title>
   </head>
   <body>
     <nav>
       <p class="logo">QUIZ</p>
       <ul class="nav__items">
         <li class="nav__item">
-          <a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22.1836 11.8359L12.5297 2.18907C12.4602 2.11942 12.3776 2.06417 12.2867 2.02647C12.1958 1.98877 12.0984 1.96936 12 1.96936C11.9016 1.96936 11.8042 1.98877 11.7133 2.02647C11.6224 2.06417 11.5398 2.11942 11.4703 2.18907L1.81642 11.8359C1.53517 12.1172 1.37579 12.4992 1.37579 12.8977C1.37579 13.725 2.04845 14.3977 2.87579 14.3977H3.89298V21.2813C3.89298 21.6961 4.22814 22.0313 4.64298 22.0313H10.5V16.7813H13.125V22.0313H19.357C19.7719 22.0313 20.107 21.6961 20.107 21.2813V14.3977H21.1242C21.5227 14.3977 21.9047 14.2406 22.1859 13.957C22.7695 13.3711 22.7695 12.4219 22.1836 11.8359V11.8359Z" fill="#9C9C9C" id="icon"/>
-            </svg>              
-          </a>
-        </li>
-        <li class="nav__item">
-          <a href="{% url 'explore' %}" class="{% if request.resolver_match.url_name == 'explore' %}active{% endif %}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 10.9C11.39 10.9 10.9 11.39 10.9 12C10.9 12.61 11.39 13.1 12 13.1C12.61 13.1 13.1 12.61 13.1 12C13.1 11.39 12.61 10.9 12 10.9ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.19 14.19L6 18L9.81 9.81L18 6L14.19 14.19Z" fill="#9C9C9C" id="icon"/>
-            </svg>              
-          </a>
-        </li>
-        <li class="nav__item">
-          <a href="{% url 'settings' %}" class="{% if request.resolver_match.url_name == 'settings' or request.resolver_match.url_name == 'security' or request.resolver_match.url_name == 'theme' %}active{% endif %}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.82 22H10.18C9.95194 22 9.73071 21.9221 9.55301 21.7792C9.37531 21.6362 9.25181 21.4368 9.20301 21.214L8.79601 19.33C8.25306 19.0921 7.73824 18.7946 7.26101 18.443L5.42401 19.028C5.20657 19.0973 4.97196 19.0902 4.75913 19.0078C4.5463 18.9254 4.36806 18.7727 4.25401 18.575L2.43001 15.424C2.31715 15.2261 2.27479 14.9958 2.30985 14.7708C2.34491 14.5457 2.45532 14.3392 2.62301 14.185L4.04801 12.885C3.9832 12.2961 3.9832 11.7019 4.04801 11.113L2.62301 9.816C2.45508 9.66177 2.34452 9.45507 2.30946 9.22978C2.27439 9.00449 2.3169 8.77397 2.43001 8.576L4.25001 5.423C4.36406 5.22532 4.5423 5.07259 4.75513 4.99019C4.96796 4.90778 5.20257 4.90066 5.42001 4.97L7.25701 5.555C7.50101 5.375 7.75501 5.207 8.01701 5.055C8.27001 4.913 8.53001 4.784 8.79601 4.669L9.20401 2.787C9.25258 2.5642 9.37584 2.36469 9.55335 2.22155C9.73087 2.07841 9.95197 2.00024 10.18 2H13.82C14.048 2.00024 14.2691 2.07841 14.4467 2.22155C14.6242 2.36469 14.7474 2.5642 14.796 2.787L15.208 4.67C15.7503 4.90927 16.2649 5.20668 16.743 5.557L18.581 4.972C18.7983 4.90292 19.0327 4.91017 19.2453 4.99256C19.4579 5.07495 19.636 5.22753 19.75 5.425L21.57 8.578C21.802 8.985 21.722 9.5 21.377 9.817L19.952 11.117C20.0168 11.7059 20.0168 12.3001 19.952 12.889L21.377 14.189C21.722 14.507 21.802 15.021 21.57 15.428L19.75 18.581C19.636 18.7787 19.4577 18.9314 19.2449 19.0138C19.0321 19.0962 18.7974 19.1033 18.58 19.034L16.743 18.449C16.2661 18.8003 15.7516 19.0975 15.209 19.335L14.796 21.214C14.7472 21.4366 14.6239 21.6359 14.4464 21.7788C14.2689 21.9218 14.0479 21.9998 13.82 22V22ZM11.996 8C10.9351 8 9.91772 8.42143 9.16758 9.17157C8.41743 9.92172 7.99601 10.9391 7.99601 12C7.99601 13.0609 8.41743 14.0783 9.16758 14.8284C9.91772 15.5786 10.9351 16 11.996 16C13.0569 16 14.0743 15.5786 14.8244 14.8284C15.5746 14.0783 15.996 13.0609 15.996 12C15.996 10.9391 15.5746 9.92172 14.8244 9.17157C14.0743 8.42143 13.0569 8 11.996 8V8Z" fill="#9C9C9C" id="icon"/>
+          <a
+            href="{% url 'index' %}"
+            class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.1836 11.8359L12.5297 2.18907C12.4602 2.11942 12.3776 2.06417 12.2867 2.02647C12.1958 1.98877 12.0984 1.96936 12 1.96936C11.9016 1.96936 11.8042 1.98877 11.7133 2.02647C11.6224 2.06417 11.5398 2.11942 11.4703 2.18907L1.81642 11.8359C1.53517 12.1172 1.37579 12.4992 1.37579 12.8977C1.37579 13.725 2.04845 14.3977 2.87579 14.3977H3.89298V21.2813C3.89298 21.6961 4.22814 22.0313 4.64298 22.0313H10.5V16.7813H13.125V22.0313H19.357C19.7719 22.0313 20.107 21.6961 20.107 21.2813V14.3977H21.1242C21.5227 14.3977 21.9047 14.2406 22.1859 13.957C22.7695 13.3711 22.7695 12.4219 22.1836 11.8359V11.8359Z"
+                fill="#9C9C9C"
+                id="icon"
+              />
             </svg>
           </a>
         </li>
         <li class="nav__item">
-          <a href="{% url 'notifications' %}" class="{% if request.resolver_match.url_name == 'notifications' %}active{% endif %}">
+          <a
+            href="{% url 'explore' %}"
+            class="{% if request.resolver_match.url_name == 'explore' %}active{% endif %}"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 10.9C11.39 10.9 10.9 11.39 10.9 12C10.9 12.61 11.39 13.1 12 13.1C12.61 13.1 13.1 12.61 13.1 12C13.1 11.39 12.61 10.9 12 10.9ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.19 14.19L6 18L9.81 9.81L18 6L14.19 14.19Z"
+                fill="#9C9C9C"
+                id="icon"
+              />
+            </svg>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a
+            href="{% url 'settings' %}"
+            class="{% if request.resolver_match.url_name == 'settings' or request.resolver_match.url_name == 'security' or request.resolver_match.url_name == 'theme' %}active{% endif %}"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.82 22H10.18C9.95194 22 9.73071 21.9221 9.55301 21.7792C9.37531 21.6362 9.25181 21.4368 9.20301 21.214L8.79601 19.33C8.25306 19.0921 7.73824 18.7946 7.26101 18.443L5.42401 19.028C5.20657 19.0973 4.97196 19.0902 4.75913 19.0078C4.5463 18.9254 4.36806 18.7727 4.25401 18.575L2.43001 15.424C2.31715 15.2261 2.27479 14.9958 2.30985 14.7708C2.34491 14.5457 2.45532 14.3392 2.62301 14.185L4.04801 12.885C3.9832 12.2961 3.9832 11.7019 4.04801 11.113L2.62301 9.816C2.45508 9.66177 2.34452 9.45507 2.30946 9.22978C2.27439 9.00449 2.3169 8.77397 2.43001 8.576L4.25001 5.423C4.36406 5.22532 4.5423 5.07259 4.75513 4.99019C4.96796 4.90778 5.20257 4.90066 5.42001 4.97L7.25701 5.555C7.50101 5.375 7.75501 5.207 8.01701 5.055C8.27001 4.913 8.53001 4.784 8.79601 4.669L9.20401 2.787C9.25258 2.5642 9.37584 2.36469 9.55335 2.22155C9.73087 2.07841 9.95197 2.00024 10.18 2H13.82C14.048 2.00024 14.2691 2.07841 14.4467 2.22155C14.6242 2.36469 14.7474 2.5642 14.796 2.787L15.208 4.67C15.7503 4.90927 16.2649 5.20668 16.743 5.557L18.581 4.972C18.7983 4.90292 19.0327 4.91017 19.2453 4.99256C19.4579 5.07495 19.636 5.22753 19.75 5.425L21.57 8.578C21.802 8.985 21.722 9.5 21.377 9.817L19.952 11.117C20.0168 11.7059 20.0168 12.3001 19.952 12.889L21.377 14.189C21.722 14.507 21.802 15.021 21.57 15.428L19.75 18.581C19.636 18.7787 19.4577 18.9314 19.2449 19.0138C19.0321 19.0962 18.7974 19.1033 18.58 19.034L16.743 18.449C16.2661 18.8003 15.7516 19.0975 15.209 19.335L14.796 21.214C14.7472 21.4366 14.6239 21.6359 14.4464 21.7788C14.2689 21.9218 14.0479 21.9998 13.82 22V22ZM11.996 8C10.9351 8 9.91772 8.42143 9.16758 9.17157C8.41743 9.92172 7.99601 10.9391 7.99601 12C7.99601 13.0609 8.41743 14.0783 9.16758 14.8284C9.91772 15.5786 10.9351 16 11.996 16C13.0569 16 14.0743 15.5786 14.8244 14.8284C15.5746 14.0783 15.996 13.0609 15.996 12C15.996 10.9391 15.5746 9.92172 14.8244 9.17157C14.0743 8.42143 13.0569 8 11.996 8V8Z"
+                fill="#9C9C9C"
+                id="icon"
+              />
+            </svg>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a
+            href="{% url 'notifications' %}"
+            class="{% if request.resolver_match.url_name == 'notifications' %}active{% endif %}"
+          >
             <div class="{% if user.is_authenticated %}bell{% endif %}">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 22C12.6193 22.0008 13.2235 21.8086 13.7285 21.4502C14.2335 21.0917 14.6143 20.5849 14.818 20H9.182C9.38566 20.5849 9.76648 21.0917 10.2715 21.4502C10.7765 21.8086 11.3807 22.0008 12 22V22ZM19 14.586V10C19 6.783 16.815 4.073 13.855 3.258C13.562 2.52 12.846 2 12 2C11.154 2 10.438 2.52 10.145 3.258C7.185 4.074 5 6.783 5 10V14.586L3.293 16.293C3.19996 16.3857 3.12617 16.4959 3.07589 16.6172C3.0256 16.7386 2.99981 16.8687 3 17V18C3 18.2652 3.10536 18.5196 3.29289 18.7071C3.48043 18.8946 3.73478 19 4 19H20C20.2652 19 20.5196 18.8946 20.7071 18.7071C20.8946 18.5196 21 18.2652 21 18V17C21.0002 16.8687 20.9744 16.7386 20.9241 16.6172C20.8738 16.4959 20.8 16.3857 20.707 16.293L19 14.586Z" fill="#9C9C9C" id="icon"/>
-              </svg>                
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 22C12.6193 22.0008 13.2235 21.8086 13.7285 21.4502C14.2335 21.0917 14.6143 20.5849 14.818 20H9.182C9.38566 20.5849 9.76648 21.0917 10.2715 21.4502C10.7765 21.8086 11.3807 22.0008 12 22V22ZM19 14.586V10C19 6.783 16.815 4.073 13.855 3.258C13.562 2.52 12.846 2 12 2C11.154 2 10.438 2.52 10.145 3.258C7.185 4.074 5 6.783 5 10V14.586L3.293 16.293C3.19996 16.3857 3.12617 16.4959 3.07589 16.6172C3.0256 16.7386 2.99981 16.8687 3 17V18C3 18.2652 3.10536 18.5196 3.29289 18.7071C3.48043 18.8946 3.73478 19 4 19H20C20.2652 19 20.5196 18.8946 20.7071 18.7071C20.8946 18.5196 21 18.2652 21 18V17C21.0002 16.8687 20.9744 16.7386 20.9241 16.6172C20.8738 16.4959 20.8 16.3857 20.707 16.293L19 14.586Z"
+                  fill="#9C9C9C"
+                  id="icon"
+                />
+              </svg>
               {% if user %}
               <span>{{ user.get_unread_notifications.count }}</span>
               {% endif %}
@@ -55,72 +105,95 @@
         </li>
 
         {% if user.is_authenticated %}
-          <li class="nav__item">
-            <a href="{% url 'profile' user.username %}" class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.625 12C14.6629 12 17.125 9.53789 17.125 6.5C17.125 3.46211 14.6629 1 11.625 1C8.58711 1 6.125 3.46211 6.125 6.5C6.125 9.53789 8.58711 12 11.625 12ZM15.475 13.375H14.7574C13.8035 13.8133 12.7422 14.0625 11.625 14.0625C10.5078 14.0625 9.45078 13.8133 8.49258 13.375H7.775C4.58672 13.375 2 15.9617 2 19.15V20.9375C2 22.0762 2.92383 23 4.0625 23H19.1875C20.3262 23 21.25 22.0762 21.25 20.9375V19.15C21.25 15.9617 18.6633 13.375 15.475 13.375Z" fill="#9C9C9C" id="icon"/>
-              </svg>                
-            </a>
-          </li>
+        <li class="nav__item">
+          <a
+            href="{% url 'profile' user.username %}"
+            class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.625 12C14.6629 12 17.125 9.53789 17.125 6.5C17.125 3.46211 14.6629 1 11.625 1C8.58711 1 6.125 3.46211 6.125 6.5C6.125 9.53789 8.58711 12 11.625 12ZM15.475 13.375H14.7574C13.8035 13.8133 12.7422 14.0625 11.625 14.0625C10.5078 14.0625 9.45078 13.8133 8.49258 13.375H7.775C4.58672 13.375 2 15.9617 2 19.15V20.9375C2 22.0762 2.92383 23 4.0625 23H19.1875C20.3262 23 21.25 22.0762 21.25 20.9375V19.15C21.25 15.9617 18.6633 13.375 15.475 13.375Z"
+                fill="#9C9C9C"
+                id="icon"
+              />
+            </svg>
+          </a>
+        </li>
         {% endif %}
 
         <li class="nav__item">
           {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" title="Logout">
-              <img src="{% static 'img/exit.svg' %}" alt="exit">
-            </a>
+          <a href="{% url 'logout' %}" title="Logout">
+            <img src="{% static 'img/exit.svg' %}" alt="exit" />
+          </a>
           {% else %}
-            <a href="{% url 'login' %}">Sign in</a>
+          <a href="{% url 'login' %}">Sign in</a>
           {% endif %}
         </li>
       </ul>
 
-      <button id="burger-icon">
+      <!-- <button id="burger-icon">
         <img src="{% static 'img/menu-icon.svg' %}" alt="burger icon">
-      </button>
+      </button> -->
+      <div id="burger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </nav>
-    
+
     <div class="menu" id="menu">
       {% if user.is_authenticated %}
-        <!-- <li class="nav__item">
+      <!-- <li class="nav__item">
           <a href="{% url 'profile' user.username %}">{{ user.username }}</a>
         </li> -->
-        <a href="{% url 'profile' user.username %}" class="menu__profile">
-          <img src="{% static 'img/'|add:user.avatar|add:'.png' %}" alt="Profile Picture" class="user-avatar">
-          <h2>{{user.username}}</h2>
-        </a>
+      <a href="{% url 'profile' user.username %}" class="menu__profile">
+        <img
+          src="{% static 'img/'|add:user.avatar|add:'.png' %}"
+          alt="Profile Picture"
+          class="user-avatar"
+        />
+        <h2>{{user.username}}</h2>
+      </a>
       {% endif %}
-      
+
       <ul class="nav__items">
         <li class="nav__item">
-          <img src="{% static 'img/home.svg' %}" alt="home icon">
+          <img src="{% static 'img/home.svg' %}" alt="home icon" />
           <a href="{% url 'index' %}">Home</a>
         </li>
         <li class="nav__item">
-          <img src="{% static 'img/explore.svg' %}" alt="explore icon">
+          <img src="{% static 'img/explore.svg' %}" alt="explore icon" />
           <a href="{% url 'explore' %}">Explore</a>
         </li>
         <li class="nav__item">
-          <img src="{% static 'img/settings.svg' %}" alt="settings icon">
+          <img src="{% static 'img/settings.svg' %}" alt="settings icon" />
           <a href="{% url 'settings' %}">Settings</a>
         </li>
         <li class="nav__item">
           <!-- <div class="bell"> -->
-            <div class="bell">
-              <img src="{% static 'img/bell.svg' %}" alt="notifications icon">
-              {% if user %}
-              <span>{{ user.get_unread_notifications.count }}</span>
-              {% endif %}
-            </div>
-            <!-- </div> -->
+          <div class="bell">
+            <img src="{% static 'img/bell.svg' %}" alt="notifications icon" />
+            {% if user %}
+            <span>{{ user.get_unread_notifications.count }}</span>
+            {% endif %}
+          </div>
+          <!-- </div> -->
           <a href="{% url 'notifications' %}">Notifications</a>
         </li>
         <li class="nav__item">
           {% if user.is_authenticated %}
-            <img src="{% static 'img/exit.svg' %}" alt="exit">
-            <a href="{% url 'logout' %}">exit</a>
+          <img src="{% static 'img/exit.svg' %}" alt="exit" />
+          <a href="{% url 'logout' %}">exit</a>
           {% else %}
-            <a href="{% url 'login' %}">Sign in</a>
+          <a href="{% url 'login' %}">Sign in</a>
           {% endif %}
         </li>
       </ul>
@@ -129,43 +202,103 @@
     <header class="header">
       <form action="{% url 'search' %}">
         <div class="search">
-          <input type="search" name="q" placeholder="Search" class="search__input" />
+          <input
+            type="search"
+            name="q"
+            placeholder="Search"
+            class="search__input"
+          />
           <button type="submit" class="search__btn">
-            <img src="{% static 'img/search-icon.svg' %}" alt="Search" class="search__icon">
+            <img
+              src="{% static 'img/search-icon.svg' %}"
+              alt="Search"
+              class="search__icon"
+            />
           </button>
         </div>
       </form>
 
-      <a href="" class="achievements">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 6.99999C14.1217 6.99999 16.1566 7.84285 17.6569 9.34314C19.1571 10.8434 20 12.8783 20 15C20 17.1217 19.1571 19.1566 17.6569 20.6568C16.1566 22.1571 14.1217 23 12 23C9.87827 23 7.84344 22.1571 6.34315 20.6568C4.84285 19.1566 4 17.1217 4 15C4 12.8783 4.84285 10.8434 6.34315 9.34314C7.84344 7.84285 9.87827 6.99999 12 6.99999V6.99999ZM12 10.5L10.677 13.18L7.72 13.61L9.86 15.695L9.355 18.641L12 17.25L14.645 18.64L14.14 15.695L16.28 13.609L13.323 13.179L12 10.5ZM13 1.99899L18 1.99999V4.99999L16.637 6.13799C15.5059 5.54458 14.2711 5.17483 13 5.04899V1.99999V1.99899ZM11 1.99899V5.04899C9.72935 5.17464 8.49482 5.54405 7.364 6.13699L6 4.99999V1.99999L11 1.99899V1.99899Z" fill="#9C9C9C" id="icon"/>
+      <div class="btn--lucky btn">
+        <a href="">
+          <img src="{% static 'img/icons/dice.svg' %}" alt="I'm felling lucky icon">
+          <p class="bold">I'm lucky</p>
+        </a>
+      </div>
+      <!-- <a href="" class="achievements btn">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 6.99999C14.1217 6.99999 16.1566 7.84285 17.6569 9.34314C19.1571 10.8434 20 12.8783 20 15C20 17.1217 19.1571 19.1566 17.6569 20.6568C16.1566 22.1571 14.1217 23 12 23C9.87827 23 7.84344 22.1571 6.34315 20.6568C4.84285 19.1566 4 17.1217 4 15C4 12.8783 4.84285 10.8434 6.34315 9.34314C7.84344 7.84285 9.87827 6.99999 12 6.99999V6.99999ZM12 10.5L10.677 13.18L7.72 13.61L9.86 15.695L9.355 18.641L12 17.25L14.645 18.64L14.14 15.695L16.28 13.609L13.323 13.179L12 10.5ZM13 1.99899L18 1.99999V4.99999L16.637 6.13799C15.5059 5.54458 14.2711 5.17483 13 5.04899V1.99999V1.99899ZM11 1.99899V5.04899C9.72935 5.17464 8.49482 5.54405 7.364 6.13699L6 4.99999V1.99999L11 1.99899V1.99899Z"
+            fill="#fff"
+            id="icon"
+          />
         </svg>
-
-        Achievements
-      </a>
+        <span> Achievements </span>
+      </a> -->
     </header>
 
     {% block body %} {% endblock body %}
 
-    <!-- <footer class="footer">
-      <ul>
-        <li class="footer__item">
-          <h5>QUIZ</h5>
-          <p>&copy; QUIZ 2022</p>
-        </li>
-        <li class="footer__item">
-          <a href="">Terms</a>
-        </li>
-        <li class="footer__item">
-          <a href="">Security</a>
-        </li>
-        <li class="footer__item">
-          <a href="">Contact</a>
-        </li>
-        <li class="footer__item">
-          <a href="">About</a>
-        </li>
-      </ul>
-    </footer> -->
+    <footer class="footer">
+      <section class="footer__content">
+        <div class="left">
+          <!-- <img src="" alt="logo" class="logo" /> -->
+          <h2>QUIZ</h2>
+          <p>
+            Learn and have fun with our wonderful quizes about any topic you
+            imagine.
+          </p>
+        </div>
+        <div class="right">
+          <ul class="social">
+            <li class="social__item">
+              <a href="">
+                <img
+                  src="{% static 'img/icons/github.svg' %}"
+                  alt="github icon"
+                  class="social__icon"
+                />
+              </a>
+            </li>
+            <li class="social__item">
+              <a href="">
+                <img
+                  src="{% static 'img/icons/dribbble.svg' %}"
+                  alt="dribbble icon"
+                  class="social__icon"
+                />
+              </a>
+            </li>
+            <li class="social__item">
+              <a href="">
+                <img
+                  src="{% static 'img/icons/twitter.svg' %}"
+                  alt="twitter icon"
+                  class="social__icon"
+                />
+              </a>
+            </li>
+            <li class="social__item">
+              <a href="">
+                <img
+                  src="{% static 'img/icons/facebook.svg' %}"
+                  alt="facebookicon"
+                  class="social__icon"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <div class="footer__bottom">
+        <span>© 2022 QUIZ. All rights reserved.</span>
+        <p class="footer__lang">English</p>
+      </div>
+    </footer>
   </body>
 </html>

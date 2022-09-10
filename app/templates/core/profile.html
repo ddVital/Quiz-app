@@ -9,46 +9,40 @@
 {% block body %}
     <main class="profile">
         <section class="profile__main">
-          <div class="profile__info">
-            <img src="{% static 'img/'|add:profile.avatar|add:'.png' %}" alt="Profile Picture" class="">
-            <h1>David Vital</h1>
-            <h3>{{profile.username}}</h3>
-            <p>{{ profile.following.count}}</p>
-            <p>{{ profile.followers.count}}</p>
-          </div>
+          <img src="{% static 'img/cover-test.webp' %}" alt="{{profile.username}}'s cover image" class="cover">
+          <img src="{% static 'img/'|add:profile.avatar|add:'.png' %}" alt="Profile Picture" class="profile__pic">
         <!-- </div> -->
 
-          <div class="marks">
-            <div class="marks__results">
-              <div class="marks__icon">
-                <img src="{% static 'img/flag.svg' %}" alt="highest">
-              </div>
-              <div>
-                <h2>23</h2>
-                <p>Quizes</p>
-              </div>
+          <div class="profile__info"> <!-- marks -->
+            <div class="profile__right">
+              <h1>David Vital</h1>
+              <p class="subtext">@{{ profile.username }}</p>
             </div>
-            <div class="marks__score">
-              <div class="marks__icon">
-                <img src="{% static 'img/highest.svg' %}" alt="highest">
+            <div class="profile__social">
+              {% if request.user == profile %}
+                <button class="btn btn--large btn--follow">Edit Profile</button>
+              {% else %}
+                {% if profile in request.user.following.all %}
+                  <button class="btn btn--secondary btn--large btn--follow">Unfollow</button>
+                {% else %}
+                  <button class="btn btn--large btn--follow">Follow</button>
+                {% endif %}
+              {% endif %}
+                <div class="follows-count">
+                  <p><strong>{{ profile.following.count}}</strong> following</p>
+                  <span>&bull;</span>
+                  <p><strong>{{ profile.followers.count}}</strong> followers</p>
+                </div>
               </div>
-              <div>
-                <h2>98%</h2>
-                <p>Quizes media</p>
-              </div>
-            </div>
-            <div class="marks__answers">
-              <div class="marks__icon">
-                <img src="{% static 'img/check.svg' %}" alt="highest">
-              </div>
-              <div>
-                <h2>142</h2>
-                <p>correct answers</p>
-              </div>
-            </div>
           </div>
         </section>
 
+        <section class="profile__results">
+          <p class="section-name">Results</p>
+          {% for result in results %}
+            {% include 'modules/results-card.html' %}
+          {% endfor %}
+        </section>
         <!-- <section>
           <header>
 

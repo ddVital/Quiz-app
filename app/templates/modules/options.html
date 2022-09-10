@@ -1,12 +1,16 @@
+{% load static %}
 <div class="options">
     <ul>
         <li class="options__item {% if request.resolver_match.url_name == 'settings' %}current{% endif %}">
+            <img src="{% static 'img/icons/user.svg' %}" alt="user icon" class="icon">
             <a href="{% url 'settings' %}">Account</a>
         </li>
         <li class="options__item {% if request.resolver_match.url_name == 'security' %}current{% endif %}">
+            <img src="{% static 'img/icons/lock.svg' %}" alt="lock icon" class="icon">
             <a href="{% url 'security' %}">Security</a>
         </li>
         <li class="options__item {% if request.resolver_match.url_name == 'theme' %}current{% endif %}">
+            <img src="{% static 'img/icons/paint.svg' %}" alt="theme icon" class="icon">
             <a href="{% url 'theme' %}">Theme</a>
         </li>
     </ul>

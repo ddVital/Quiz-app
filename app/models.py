@@ -44,6 +44,11 @@ CATEGORY_CHOICES = (
     ('history', 'history'),
     ('tech', 'tech'),
     ('science', 'science'),
+    ('Astronomy', 'Astronomy'),
+    ('Pop', 'Pop'),
+    ('Celebrites', 'Celebrites'),
+    ('Celebrites', 'Celebrites'),
+    ('Celebrites', 'Celebrites'),
 )
 
 class User(AbstractUser):

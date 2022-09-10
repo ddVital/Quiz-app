@@ -1,21 +1,37 @@
-{% extends 'core/layout.html' %}
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-    Login
-{% endblock title %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-{% block body %}
+    {% if user.theme == 'dark' %}
+
+    {% else %}  
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endif %}  
+
+    <script src="{% static 'js/main.js' %}" defer></script>
+
+</head>
+<body>
     <section class="auth">
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %} 
-            <li>
+            <div class="form">
                 {{ form.username }}
-            </li>
-            <li>
+                <label for="username" class="input__label">Username</label>
+                {{ form.username.errors }}
+            </div>
+            <div class="form">
                 {{ form.password }}
-            </li>
+                <label for="password" class="input__label">Password</label>
+                {{ form.password.errors }}
+            </div>
             <li>
                 <button type="submit" class="btn btn--large">Login</button>
             </li>
@@ -29,4 +45,5 @@
             <a href="{% url 'password_reset' %}">{% trans 'Forgot Password?' %}</a>
         </div>
     </section>
-{% endblock body %}
+</body>
+</html>

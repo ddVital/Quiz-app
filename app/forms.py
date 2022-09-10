@@ -8,8 +8,8 @@ from .models import Answer, Question, User
 UserModel = get_user_model()
 
 class Login_form(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'auth__input', 'placeholder': ' '}), required=True,  label="")
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'auth__input', 'placeholder': ' '}), required=True, label="")    
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form__input', 'id': 'username', 'placeholder': ' ', 'autocomplete': 'off'}), required=True,  label="")
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form__input', 'id': 'password', 'placeholder': ' '}), required=True, label="")    
 
 
 class Register_form(forms.ModelForm):

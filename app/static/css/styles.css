@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: #fff;
+  background-color: #f8f8f8;
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -38,7 +38,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+  -webkit-box-shadow: 0 0 0 30px #f8f8f8 inset !important;
 }
 
 input {
@@ -113,12 +113,12 @@ input {
 }
 
 .form .input__label {
-  background-color: #fff;
+  background-color: #f8f8f8;
   position: absolute;
   padding: 0 0.4rem;
   font-size: .8em;
   color: #222;
-  left: 1rem;
+  left: .5rem;
   top: 0.9rem;
   cursor: text;
   -webkit-transition: all 200ms ease-in;
@@ -129,7 +129,7 @@ input {
 .form .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .input__label {
   top: -0.5rem;
   font-size: .8em;
-  left: 0.8rem;
+  left: 0.5rem;
 }
 
 .btn {
@@ -184,9 +184,68 @@ input {
   font-size: .9em;
 }
 
+/* =+=+=+=+=+= Burguer Icon styles =+=+=+=+=+=*/
+#burger-icon {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+#burger-icon span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #222;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+
+#burger-icon span:nth-child(1) {
+  top: 0px;
+}
+
+#burger-icon span:nth-child(2), #burger-icon span:nth-child(3) {
+  top: 12px;
+}
+
+#burger-icon span:nth-child(4) {
+  top: 30px;
+}
+
+#burger-icon.burguer-open span:nth-child(1) {
+  top: 15px;
+  width: 0%;
+}
+
+#burger-icon.burguer-open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+#burger-icon.burguer-open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+#burger-icon.burguer-open span:nth-child(4) {
+  top: 18px;
+  width: 0%;
+}
+
 /* =+=+=+=+=+= Nav && Header styles =+=+=+=+=+=*/
 .menu {
-  background-color: #fafafa;
+  background-color: #fff;
   position: absolute;
   width: 70vw;
   height: 100vh;
@@ -196,8 +255,8 @@ input {
   text-align: center;
   font-size: .9em;
   z-index: 42;
-  -webkit-transition: all .8s ease-in-out;
-  transition: all .8s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
 }
 
 .menu a {
@@ -236,7 +295,8 @@ input {
 
 .achievements {
   display: none;
-  padding: 12px;
+  padding: 10px;
+  width: 160px;
   font-size: .9em;
 }
 
@@ -303,7 +363,7 @@ nav #burger-icon img {
 
 @media only screen and (min-width: 768px) {
   nav {
-    background-color: #fafafa;
+    background-color: #fff;
     position: fixed;
     top: 0;
     width: 55px;
@@ -386,9 +446,6 @@ nav #burger-icon img {
         -ms-flex-align: center;
             align-items: center;
   }
-  .header a {
-    color: #5016f0;
-  }
   .header .search {
     width: 400px;
   }
@@ -413,7 +470,7 @@ nav #burger-icon img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #fafafa;
+  background-color: #fff;
   border-radius: 8px;
 }
 
@@ -469,7 +526,7 @@ nav #burger-icon img {
           align-items: center;
   background-color: #5016f0;
   color: #fafafa;
-  border: 1px solid #fafafa;
+  border: 1px solid #fff;
   width: 18px;
   height: 18px;
   position: absolute;
@@ -481,15 +538,6 @@ nav #burger-icon img {
 }
 
 /* =+=+=+=+=+= Home styles =+=+=+=+=+=*/
-.index__quizes .quizes {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  overflow-x: scroll;
-}
-
 @media (min-width: 768px) {
   .index__quizes {
     margin: 2rem 0;
@@ -501,14 +549,26 @@ nav #burger-icon img {
 }
 
 .card {
-  background-color: #fafafa;
+  background-color: #fff;
   border-radius: 8px;
-  position: relative;
-  width: 280px;
-  height: 300px;
-  overflow: hidden;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+  position: relative;
+  width: 250px;
+  -webkit-user-drag: none;
+  user-drag: none;
+  height: 300px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 0 4rem 0 0;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .card:hover {
@@ -522,6 +582,7 @@ nav #burger-icon img {
 .card span,
 .card .btn {
   font-size: .9em;
+  white-space: normal !important;
 }
 
 .card .card__cover {
@@ -571,8 +632,20 @@ nav #burger-icon img {
 }
 
 /* =+=+=+=+=+= Quiz Page styles =+=+=+=+=+= */
+.quiz__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 #myProgress {
-  width: 100%;
+  width: 85%;
   height: 16px;
   border-radius: 50px;
   background-color: #c9c9c9;
@@ -609,22 +682,44 @@ nav #burger-icon img {
   top: 4px;
 }
 
+.quiz {
+  height: 100vh;
+}
+
+.quiz .quiz__top {
+  height: 8vh;
+}
+
+.quiz .question__content {
+  height: 75vh;
+}
+
 .quiz .question__text {
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
 .quiz .quiz-btns {
-  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 10vh;
 }
 
 .quiz .quiz-btns button {
   font-weight: bolder;
   font-size: 1em;
+  width: 100%;
   padding: .6rem 1.6rem;
 }
 
 .quiz .answer {
-  background-color: #fafafa;
+  background-color: #fff;
   margin: .6rem 0;
   border-radius: 8px;
   width: 100%;
@@ -649,8 +744,8 @@ nav #burger-icon img {
   display: -ms-inline-flexbox;
   display: inline-flex;
   font-size: .8em;
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
   border-radius: 5px;
 }
 
@@ -667,37 +762,28 @@ nav #burger-icon img {
 .quiz .answer.selected {
   background-color: rgba(80, 22, 240, 0.2);
   border: none;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 /* =+=+=+=+=+= Settings styles =+=+=+=+=+= */
-.profile .profile__main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .profile .profile__info {
   margin-right: 5rem;
 }
 
-.profile .marks {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.profile .profile__info {
   height: 100px;
   width: 100%;
 }
 
-.profile .marks .marks__icon {
-  background-color: #fafafa;
+.profile .profile__info .marks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile .profile__info .marks__icon {
+  background-color: #fff;
   margin-right: 1rem;
   padding: .8rem;
   -webkit-box-shadow: 4px 4px 20px 1px #0000001a;
@@ -705,7 +791,7 @@ nav #burger-icon img {
   border-radius: 8px;
 }
 
-.profile .marks .marks__results, .profile .marks .marks__score, .profile .marks .marks__answers {
+.profile .profile__info .marks__results, .profile .profile__info .marks__score, .profile .profile__info .marks__answers {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -838,7 +924,7 @@ nav #burger-icon img {
 }
 
 .pic-menu {
-  background-color: #fafafa;
+  background-color: #fff;
   position: fixed;
   z-index: 5;
   left: 10px;
@@ -1033,9 +1119,6 @@ footer ul {
         -ms-flex-align: center;
             align-items: center;
   }
-  .header a {
-    color: #5016f0;
-  }
   .header .search {
     width: 400px;
   }
@@ -1045,5 +1128,83 @@ footer ul {
   .menu, #burger-icon {
     display: none;
   }
+}
+
+#album-rotator {
+  width: 100%;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  word-break: keep-all;
+  padding: 2rem 0;
+}
+
+#album-rotator-holder {
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  will-change: transform;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  /* transition: all 0.01s ease-out; */
+  /* transition: all 0.01s linear; */
+}
+
+#album-rotator:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: -webkit-gradient(linear, right top, left top, color-stop(5%, #f8f8f8), color-stop(40%, transparent));
+  background: linear-gradient(-90deg, #f8f8f8 5%, transparent 40%);
+}
+
+.album-item {
+  -webkit-box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  width: 250px;
+  -webkit-user-drag: none;
+  user-drag: none;
+  height: 300px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  margin: 0 3rem 0 0;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.album-item:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+.album-details {
+  width: 100%;
+  text-shadow: 0 2px 15px #00000080;
+  padding: 1rem;
+  white-space: initial;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #f8f8f8;
+  height: 100%;
+  font-size: 2.5rem;
+  font-weight: 600;
+  z-index: 99;
 }
 /*# sourceMappingURL=styles.css.map */

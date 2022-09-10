@@ -63,6 +63,8 @@ input {font-family: 'JetBrains Mono', monospace;}
 
 .bold {font-weight: bolder}
 
+.close {}
+
 .two-options {@include flexSpaceBetween();}
 
 .two-fields {
@@ -97,7 +99,7 @@ input {font-family: 'JetBrains Mono', monospace;}
         padding: 0 0.4rem;
         font-size: .8em;
         color: $color;
-        left: 1rem;
+        left: .5rem;
         top: 0.9rem;
         cursor: text;
         transition: all 200ms ease-in;
@@ -107,7 +109,7 @@ input {font-family: 'JetBrains Mono', monospace;}
     .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .input__label {
         top: -0.5rem;
         font-size: .8em;
-        left: 0.8rem;
+        left: 0.5rem;
     }
 }
 
@@ -159,6 +161,62 @@ input {font-family: 'JetBrains Mono', monospace;}
     font-size: .9em;
 }
 
+/* =+=+=+=+=+= Burguer Icon styles =+=+=+=+=+=*/
+#burger-icon {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    // margin: 40px auto;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+
+#burger-icon span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: $color;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+#burger-icon span:nth-child(1) {
+    top: 0px;
+}
+
+#burger-icon span:nth-child(2),#burger-icon span:nth-child(3) {
+    top: 12px;
+}
+
+#burger-icon span:nth-child(4) {
+    top: 30px;
+}
+
+#burger-icon.burguer-open span:nth-child(1) {
+    top: 15px;
+    width: 0%;
+    // left: 50%;
+}
+
+#burger-icon.burguer-open span:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+#burger-icon.burguer-open span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+#burger-icon.burguer-open span:nth-child(4) {
+    top: 18px;
+    width: 0%;
+    // left: 50%;
+}
+
 /* =+=+=+=+=+= Nav && Header styles =+=+=+=+=+=*/
 .menu {
     background-color: $bg-secondary;
@@ -171,7 +229,7 @@ input {font-family: 'JetBrains Mono', monospace;}
     text-align: center;
     font-size: .9em;
     z-index: 42;
-    transition: all .8s ease-in-out;
+    transition: all .4s ease-in-out;
 
     a {color: $color;}
 
@@ -200,7 +258,8 @@ input {font-family: 'JetBrains Mono', monospace;}
 
 .achievements {
     display: none;
-    padding: 12px;
+    padding: 10px;
+    width: 160px;
     font-size: .9em;
     
     @media (min-width: 768px) {
@@ -292,8 +351,6 @@ nav {
     padding: 1rem 0;
     @include flexSpaceBetween();
 
-    a {color: $third-clr;}
-
     .search {width: 400px;}
   }
 }
@@ -348,10 +405,10 @@ nav {
 /* =+=+=+=+=+= Home styles =+=+=+=+=+=*/
 .index__quizes {  
   .quizes {
-    display: flex;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
     // flex-wrap: nowrap;
-	  overflow-x: scroll;
+	//   overflow-x: scroll;
   }
 
   @media (min-width: 768px) {margin: 2rem 0;}
@@ -365,11 +422,21 @@ nav {
 .card {
     background-color: $bg-secondary;
     border-radius: $border-radius;
-    position: relative;
-    width: 280px;
-    height: 300px;
-    overflow: hidden;
     transition: all $transition-time ease-in-out;
+
+    position: relative;
+    width: 250px;
+    -webkit-user-drag: none;
+    user-drag: none;
+    height: 300px;
+    user-select: none;
+    border-radius: 10px;
+    // white-space: nowrap;
+    // overflow: hidden;
+    display: inline-block;
+    margin: 0 4rem 0 0;
+    transition: all 0.2s ease-out;
+    transform: scale(1);
 
     &:hover {
         transform: translateY(-10px);
@@ -380,6 +447,7 @@ nav {
     span,
     .btn {
         font-size: .9em;
+        white-space: normal!important;
     }
 
     .card__cover {
@@ -407,8 +475,13 @@ nav {
 }
 
 /* =+=+=+=+=+= Quiz Page styles =+=+=+=+=+= */
+.quiz__top {
+    @include flexSpaceBetween();
+    // background-color: rebeccapurple;
+}
+
 #myProgress {
-    width: 100%;
+    width: 85%;
     height: 16px;
     border-radius: 50px;
     background-color: #c9c9c9;
@@ -444,16 +517,22 @@ nav {
 
 .quiz {
     // =+=+=+=+= Questions =+=+=+=+=
-    .question {}
+    height: 100vh;
+    // background-color: red;
 
-    .question__text {margin: 3rem 0;}
+    .quiz__top {height: 8vh;}
+
+    .question__content {height: 75vh;}
+
+    .question__text {margin: 2rem 0;}
 
     .quiz-btns {
-        position: relative;
-
+        @include flexCenter();
+        height: 10vh;
         button {
             font-weight: bolder;
             font-size: 1em;
+            width: 100%;
             padding: .6rem 1.6rem;
         }
     }
@@ -474,8 +553,8 @@ nav {
             color: $color-third;
             display: inline-flex;
             font-size: .8em;
-            width: 20px;
-            height: 20px;
+            width: 19px;
+            height: 19px;
             border-radius: 5px;
         }
     
@@ -487,7 +566,7 @@ nav {
     .answer.selected {
         background-color: transparentize($color: $third-clr, $amount: .8);
         border: none;
-        transition: all $transition-time ease-in-out;
+        transition: all .2s ease-in-out;
     }
 }
 
@@ -496,21 +575,22 @@ nav {
 
   // display: flex;
   .profile__main {
-    display: flex;
-    
+    // display: flex;
   }
 
   .profile__info {
-
-    // display: inline-block;
     margin-right: 5rem;
   }
 
-  .marks {
-    @include flexSpaceBetween();
+  .profile__info { // marks
+    // @include flexSpaceBetween();
     // background-color: #2370ff;
     height: 100px;
     width: 100%;
+
+    .marks {
+        display: flex;
+    }
 
     .marks__icon {
       background-color: $bg-secondary;
@@ -521,9 +601,9 @@ nav {
     }
 
     .marks__results, .marks__score, .marks__answers {
-      // @include flexSpaceBetween();
+    //   @include flexSpaceBetween();
       display: flex;
-      // background-color: green;
+    //   background-color: green;
       width: 32%;
     }
   }
@@ -759,7 +839,7 @@ footer {
         padding: 1rem 0;
         @include flexSpaceBetween();
 
-        a {color: $third-clr;}
+        // a {color: $third-clr;}
 
         .search {width: 400px;}
     }
@@ -767,4 +847,84 @@ footer {
     .nav__items {display: block;}
 
     .menu, #burger-icon {display: none;}
+}
+
+// // =-=================================
+// body {
+//     padding: 0;
+//     margin: 0;
+//     background: radial-gradient(circle at top left, #161231, #161231);
+//     font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+//     padding: 4rem;
+// }
+
+#album-rotator {
+    width: 100%;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    word-break: keep-all;
+    padding: 2rem 0;
+}
+#album-rotator-holder {
+    position: relative;
+    user-select: none;
+    will-change: transform;
+    transition: all $transition-time ease-in-out;
+    /* transition: all 0.01s ease-out; */
+    /* transition: all 0.01s linear; */
+}
+
+div#album-rotator-holder {}
+#album-rotator:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(-90deg, $bg 5%, transparent 40%);
+}
+
+.album-item {
+    // word-break: keep-all;
+    // background: black;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+    position: relative;
+    width: 250px;
+    -webkit-user-drag: none;
+    user-drag: none;
+    height: 300px;
+    user-select: none;
+    border-radius: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0 3rem 0 0;
+    transition: all 0.2s ease-out;
+    transform: scale(1);
+}
+
+.album-item:hover {
+    transform: scale(1.02);
+}
+
+.album-details {
+    // background: transparent;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    width: 100%;
+    text-shadow: 0 2px 15px #00000080;
+    padding: 1rem;
+    white-space: initial;
+    float: left;
+    box-sizing: border-box;
+    color: $bg;
+    height: 100%;
+    font-size: 2.5rem;
+    font-weight: 600;
+    z-index: 99;
 }

@@ -1,19 +1,19 @@
-from pickle import FALSE
-from unittest import result
+from django import template
 from django.shortcuts import render
 from django.views.generic import DetailView, UpdateView, ListView
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views.generic.edit import CreateView
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
-from .models import Answer, Notification, Question, Quiz, Result, User
+from .models import Answer, Notification, Question, Quiz, Result, User, CATEGORY_CHOICES
 from .forms import Login_form, Register_form, SettingsForm
 
 
 # Create your views here.
 def index(request):
-    context = {"quizes": Quiz.objects.all()[:4]}
+    context = {"quizes": Quiz.objects.all()[:8]}
 
     return render(request, "core/index.html", context)
 
@@ -45,41 +45,6 @@ def quiz_data_view(request, slug):
         'time': quiz.time,
     })
 
-
-# class QuizResults()
-# def quiz_results(request, slug):
-#     quiz = Quiz.objects.get(slug=slug)
-#     score = 0
-
-#     if request.method == "POST":
-#         for question in quiz.get_questions():
-#             user_answer = request.POST.get(f'{question.pk}-answer')
-#             correct_answer = question.get_answers().get(correct=True).text
-#             if check_answer(user_answer, correct_answer):
-#                 score += 1
-#             # print(f"\n {question.get_answers().get(correct=True).text}: ")
-#             # print(f"{question.get_answers().get(correct=True).text == user_answer}")
-#             # print(f"{user_answer} \n\n\n")
-
-#         print(score)
-#         calc_score(score, quiz.get_questions().count())
-#         save_user_marks(request.user, quiz, score)
-
-#     return render(request, "core/results.html")
-
-
-# class ResultsView(DetailView):
-#     model = Result
-#     context_object_name = "results"
-#     template_name = "core/results.html"
-
-#     def get_context_data(self, **kwargs):
-#         # context = super().get_context_data(**kwargs)
-#         quiz = Quiz.objects.get(slug=self.object.slug)
-#         result = Result.objects.get(quiz=quiz)
-#         context = {"results": result}
-        
-#         return context
 
 def quiz_results(request, slug):
     quiz = Quiz.objects.get(slug=slug)
@@ -130,9 +95,13 @@ def save_user_marks(user, quiz, score):
     print(mark)
 
 
+@login_required
 def user_profile(request, username):
     ''' User profile '''
-    context = {"profile": User.objects.get(username=username)}
+    user_results = Result.objects.filter(user=request.user)
+    context = {
+        "profile": User.objects.get(username=username),
+        "results": user_results}
     return render(request, "core/profile.html", context)
 
 
@@ -176,7 +145,7 @@ class SettingsView(UpdateView):
 
 def explore(request):
     ''' Explore items '''
-    context = {"quizes": Quiz.objects.all()[:4]}
+    context = {"quizes": Quiz.objects.all(), "categories": CATEGORY_CHOICES}
     return render(request, "core/explore.html", context)
 
 
@@ -241,7 +210,6 @@ def delete_notification(request, id):
     notification.delete()
     
     return HttpResponseRedirect(reverse('notifications'))
-
 
 
 def notifications(request):
